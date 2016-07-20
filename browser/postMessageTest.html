@@ -1,6 +1,8 @@
 <html>
 <head>
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="assets/js/three.js"></script>
+    <script src="assets/js/OBJLoader.js"></script>
 </head>
 
 <body style="width:800px;margin: 0 auto">
@@ -15,11 +17,11 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 3 <input id="pos3" name="pos" type="radio" value="2"/>
 4 <input id="pos4" name="pos" type="radio" value="3"/><br/>
 <input type="button" id="geo"</input>
-    <br>
+<br>
     <pre id="log">
     </pre>
 
-    <script>
+<script>
     var $log = $('#log');
     var $toggle = $('#toggle');
     var $position1 = $('#pos1');
@@ -41,22 +43,21 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
             $vizor = $('iframe').first()
         }
         console.log(message.data);
-        log('OUT: '+ JSON.stringify(message))
+        log('OUT: '+ JSON.stringify(message));
         $vizor[0].contentWindow.postMessage(message, '*')
     }
-
     $toggle.on('click', function(e) {
         console.log(e.currentTarget.checked);
 
-            send({
-                command: 'setVariable',
-                name: 'cam_state',
-                value: e.currentTarget.checked
-            })
-            send({
-                command: 'getVariable',
-                name: 'cam_state'
-            })
+        send({
+            command: 'setVariable',
+            name: 'cam_state',
+            value: e.currentTarget.checked
+        })
+        send({
+            command: 'getVariable',
+            name: 'cam_state'
+        })
     })
     $position1.on('click', function(e) {
         send({
@@ -113,30 +114,48 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
             command: 'getVariable',
             name: 'obj_load'
         })
-    })
+    });
     window.addEventListener('message', function(e) {
         log('IN: ' + JSON.stringify(e.data))
     }, false)
 </script>
 
 <script>
-    var boxTexture = new THREE.ImageUtils.loadTexture("assets/business-card-box01.jpg", {}, function () {
-    });
+    var boxTexture = new THREE.ImageUtils.loadTexture("assets/business-card-box01.jpg",{},
+            /* Success*/
+            function () {
+                console.log("Texture Loaded");
+            },
+            /* FAILURE */
+            function (e) {
+                console.error(e);
+            });
+
     var boxMaterial = new THREE.MeshPhongMaterial({
         map: boxTexture,
         shininess: 40
     });
+
     var modelloader = new THREE.OBJLoader();
-    modelloader.load('../assets/business-card-box.obj', function (impObject) {
-        impObject.children.forEach(function(child){
-            if(child instanceof THREE.Mesh){
-                var decalMesh = new THREE.Mesh(new THREE.Geometry().fromBufferGeometry(child.geometry), boxMaterial);
-                decalMesh.name = "impObject";
-                scene.add(decalMesh);
-                decalTargets.push(decalMesh);
+    modelloader.load('../assets/business-card-box.obj', completionCallback );
+
+    var oldCompletionCallback = function (impObject) {
+        impObject.children.forEach(function (child) {
+            if (child instanceof THREE.Mesh) {
+                child = new THREE.Mesh(new THREE.Geometry().fromBufferGeometry(child.geometry), boxMaterial);
+                //decalMesh.name = "impObject";
+                //scene.add(decalMesh);
+
+                //decalTargets.push(decalMesh);
             }
         });
-    });
+
+        completionCallback(impObject);
+    };
+
+    var completionCallback = function (objects) {
+        console.log(objects.length);
+    };
 </script>
 </body>
 </html>
