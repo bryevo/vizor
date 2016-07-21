@@ -1,8 +1,8 @@
 <html>
 <head>
+    <script type="text/javascript" src="assets/js/three.js"></script>
+    <script type="text/javascript" src="assets/js/OBJLoader.js"></script>
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="assets/js/three.js"></script>
-    <script src="assets/js/OBJLoader.js"></script>
 </head>
 
 <body style="width:800px;margin: 0 auto">
@@ -104,16 +104,22 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
         })
     })
     $geometry.on('click', function (e){
-        console.log($geometry.val());
-        send({
-            command: 'setVariable',
-            name: 'obj_load',
-            value: $geometry.val()
-        })
-        send({
-            command: 'getVariable',
-            name: 'obj_load'
-        })
+        console.log();
+        if (themesh !== 'undefined') {
+            send({
+                command: 'setVariable',
+                name: 'obj_load',
+                value: themesh
+            })
+            send({
+                command: 'getVariable',
+                name: 'obj_load'
+            })
+        }
+        else
+        {
+            console.log("error");
+        }
     });
     window.addEventListener('message', function(e) {
         log('IN: ' + JSON.stringify(e.data))
@@ -137,12 +143,11 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
     });
 
     var modelloader = new THREE.OBJLoader();
-    modelloader.load('../assets/business-card-box.obj', completionCallback );
-
-    var oldCompletionCallback = function (impObject) {
+    modelloader.load('assets/business-card-box.obj', oldCompletionCallback = function (impObject) {
+        var object = null;
         impObject.children.forEach(function (child) {
             if (child instanceof THREE.Mesh) {
-                child = new THREE.Mesh(new THREE.Geometry().fromBufferGeometry(child.geometry), boxMaterial);
+                object = new THREE.Mesh(new THREE.Geometry().fromBufferGeometry(child.geometry), boxMaterial);
                 //decalMesh.name = "impObject";
                 //scene.add(decalMesh);
 
@@ -150,11 +155,13 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
             }
         });
 
-        completionCallback(impObject);
-    };
-
+        completionCallback(object);
+    });
+var themesh;
     var completionCallback = function (objects) {
-        console.log(objects.length);
+        debugger;
+        console.log(objects.uuid);
+        themesh = objects;
     };
 </script>
 </body>
