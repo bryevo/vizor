@@ -285,6 +285,7 @@
         "Multiply Vectors": "vector_multiply",
         "Magnitude/Length": "vector_magnitude",
         "Distance of Vectors": "vector_distance",
+        "Rotation between Vectors":"vector_direction",
         "Cross": "vector_cross",
         "Dot": "vector_dot",
         "Normalize": "vector_normalize",
