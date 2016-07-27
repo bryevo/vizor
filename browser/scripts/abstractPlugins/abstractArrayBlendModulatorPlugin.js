@@ -135,8 +135,8 @@ AbstractArrayBlendModulatorPlugin.prototype.update_state = function(updateContex
 		else {
 			if (this.value !== this.endValue) {
 				this.value = this.lerpFunc(this.startValue, this.endValue, this.blendFunc.func(1))
-				this.updated = true
-				this.always_update = false
+				this.updated = true;
+				this.always_update = false;
 			}
 		}
 	}

@@ -138,7 +138,7 @@ FileSelectControl.prototype._renderFiles = function() {
 		})
 	})
 
-	return html
+	return html;
 }
 
 FileSelectControl.prototype._render = function() {

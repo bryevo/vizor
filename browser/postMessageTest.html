@@ -104,7 +104,7 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
         })
     })
     $geometry.on('click', function (e){
-        console.log();
+        console.log(themesh);
         if (themesh !== 'undefined') {
             send({
                 command: 'setVariable',
@@ -160,8 +160,8 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 var themesh;
     var completionCallback = function (objects) {
         debugger;
-        console.log(objects.uuid);
-        themesh = objects;
+        console.log(objects.geometry.toJSON);
+        themesh = objects.geometry.toJSON;
     };
 </script>
 </body>

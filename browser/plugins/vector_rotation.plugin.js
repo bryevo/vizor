@@ -20,7 +20,7 @@ E2.p = E2.plugins["vector_direction"] = function(core, node)
 	{ 	name: 'rotation vector', 
 		dt: core.datatypes.VECTOR, 
 		desc: 'Emits the direction from A to target.', 
-		def: ore.renderer.vector_origin  
+		def: core.renderer.vector_origin
 	}
 						];
 };
@@ -47,8 +47,8 @@ E2.p.prototype.state_changed = function(ui)
 {
 	if(!ui)
 	{
-		this.vector_a = new THREE.Vector3(0, 0, 0)
-		this.vector_b = new THREE.Vector3(0, 0, 0)
+		this.vector_a = new THREE.Vector3(0, 0, 0);
+		this.vector_b = new THREE.Vector3(0, 0, 0);
 		this.result = new THREE.Vector3(0, 0, 0)
 	}
 };

@@ -329,7 +329,7 @@ THREE.MTLLoader.MaterialCreator.prototype = {
 				case 'map_kd':
 
 					// Diffuse texture map
-
+					debugger;
 					params[ 'map' ] = this.loadTexture( this.baseUrl + value );
 					params[ 'map' ].wrapS = this.wrap;
 					params[ 'map' ].wrapT = this.wrap;

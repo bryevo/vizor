@@ -109,7 +109,8 @@
         "Bounding Box Extractor": "three_object3d_bbox_extractor",
         "Line Segments": "three_line_segments",
         "Vector Line": "three_meshline_mesh",
-        "3D Object Group": "three_group"
+        "3D Object Group": "three_group",
+        "Array to 3D Object Loader": "obj_mtl_model_loader"
     },
 
     "MATERIALS AND LIGHTS": {
@@ -293,6 +294,9 @@
         "Transform": "vector_transform",
         "Add Vectors Conditionally": "add_on_trigger_vector3",
         "Rotation from Direction": "rotation_from_direction"
+    },
+    "OBRARY":{
+        "VariableString":"variable_string"
     },
 
     "OSCILLATORS": {
