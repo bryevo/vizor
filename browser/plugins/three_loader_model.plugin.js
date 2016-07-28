@@ -75,6 +75,7 @@
 		})
 
 		this.dirty = false
+		
 	}
 
 	ThreeLoaderModelPlugin.prototype.update_output = function(slot) {

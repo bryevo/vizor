@@ -60,7 +60,7 @@
             if (data)
                 this.inputarray = data;
             console.log("Array is: " + this.inputarray);  //check what array contains
-            console.log(" DATA SUCCESSFULLY GIVEN TO INPUT ARRAY IN objmtlloader");
+
         }
     };
 
@@ -77,10 +77,13 @@
         this.materials = this.getDefaultMaterials();
         //
         //E2.core.assetLoader.loadAsset('model', this.state.url).then(function(asset) {
-        E2.core.assetLoader.loadAsset('model', this.inputarray).then(function(asset) {
+        console.log(" DATA SUCCESSFULLY GIVEN TO INPUT ARRAY IN objmtlloader");
 
-            that.onObjLoaded(asset.geometries, asset.materials)
-        })
+        E2.core.assetLoader
+            .loadAsset('model', this.inputarray)
+            .then(function(asset) {
+                that.onObjLoaded(asset.geometries, asset.materials)
+            })
 
         this.dirty = false
     }

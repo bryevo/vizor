@@ -29,7 +29,7 @@ function AssetLoader(loaders) {
 		audiobuffer: E2.Loaders.AudioBufferLoader
 	}
 
-	this.loaders = loaders || defaultLoaders
+	this.loaders = loaders || defaultLoaders  //checks to use loaders if false use default loaders
 
 	this.assetPromises = {}
 

@@ -1,7 +1,9 @@
 (function() {
 
 if (typeof(module) !== 'undefined')
-	E2.Loader = require('./loader.js').Loader
+	E2.Loader = require('./loader.js').Loader;
+
+
 
 	function findOBJ(url) {
 	var i;
@@ -38,33 +40,35 @@ function ModelLoader(url) {
 		if (typeof url === 'object') {    // typeof conventions object = array
 			// if input into modelloader is array then proceed with function
 			console.log("function start");
-			findOBJ(url);
-			debugger;
+			var OBRARY = findOBJ(url);
+			this.loadObj(OBRARY);
+
 			findMTL(url);
 			console.log("function completed");
-			debugger;
+
 		}
-		else{
-		console.log("LOADING NORMAL NON ARRAY OBJECTS");
-		extname = url.substring(url.lastIndexOf('.')).toLowerCase();  //will continue to switch statement
-	}
-	switch(extname) {
-		case '.obj':
-			console.log("loading this non obrary obj" + url);
-			this.loadObj(url);
-			debugger;
-			break;
-		case '.js':
-		case '.json':
-		case '.dae':
-		case '.fbx':
-		case '.gltf':
-			this.loadObject3D(url)
-			break;
-		default:
-			msg('ERROR: Don`t know how to load', url, extname)
-			break;
-	}
+		else {
+			console.log("LOADING NORMAL NON ARRAY OBJECTS");
+			extname = url.substring(url.lastIndexOf('.')).toLowerCase();  //will continue to switch statement
+
+			switch (extname) {
+				case '.obj':
+					console.log("loading this non obrary obj" + url);
+					this.loadObj(url);
+					console.log(url);
+					break;
+				case '.js':
+				case '.json':
+				case '.dae':
+				case '.fbx':
+				case '.gltf':
+					this.loadObject3D(url)
+					break;
+				default:
+					msg('ERROR: Don`t know how to load', url, extname)
+					break;
+			}
+		} //else completer
 }
 
 ModelLoader.prototype = Object.create(E2.Loader.prototype)
