@@ -1,7 +1,8 @@
 (function() {
     function progress() {
-        console.log('Loading progress', this.inputarray, arguments)
+        console.log('Loading progress', input_array, arguments)
     }
+var input_array = []; //GLOBAL ARRAY
 
     function errorHandler(err) {
         msg('ERROR: '+err.toString())
@@ -58,8 +59,8 @@
     ArraytoOBJLoaderPlugin.prototype.update_input = function(slot, data) {
         if (slot.index === 0) {
             if (data)
-                this.inputarray = data;
-            console.log("Array is: " + this.inputarray);  //check what array contains
+                input_array = data;
+            console.log("Array is: " + input_array);  //check what array contains
 
         }
     };
@@ -68,9 +69,10 @@
         if (!this.dirty)
             return;
 
-        if (!this.inputarray)
+        if (!input_array) {
+            console.log("Please reconnect");
             return;
-
+        }
         var that = this;
 
         this.geometries = this.getDefaultGeometries();
@@ -80,10 +82,11 @@
         console.log(" DATA SUCCESSFULLY GIVEN TO INPUT ARRAY IN objmtlloader");
 
         E2.core.assetLoader
-            .loadAsset('model', this.inputarray)
+            .loadAsset('model', input_array)
             .then(function(asset) {
                 that.onObjLoaded(asset.geometries, asset.materials)
             })
+        console.log("loading array complete");
 
         this.dirty = false
     }

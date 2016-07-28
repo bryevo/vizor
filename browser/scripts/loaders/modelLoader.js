@@ -7,31 +7,43 @@ if (typeof(module) !== 'undefined')
 
 	function findOBJ(url) {
 	var i;
+
 	for (i = 0; i < url.length; i++) {
-		if (/(.obj)/g.test(url[i]) == true) {
-			console.log("OBJ FOUND");
-			var result = url[i];
+		var objRegex = (/(.obj)/g.test(url[i]));   //REGEX CHECK FOR .OBJ
+		console.log("The RESULT OF THE CHECK IS: " + objRegex); // TRUE/FALSE
+		console.log("OUR INTERATIONS ARE: " + url[i]); 	// LOG WHATS IN ARRAY/INTERATED
+
+		if (objRegex == true) {
+			var result = url[i];	// the obj string target
 			console.log(result);
+			console.log("OBJ FOUND");
 			return result;
 		}
-		else {
+	}
+			console.log(url);		//ALTERNATIVE ERROR CATCH
 			console.log("ERROR NO OBJ IN ARRAY!");
 			return;
-		}
-	}
+
 }//end function declaration
 	function findMTL(url) {
 		var i;
+
 		for (i = 0; i < url.length; i++) {
-			if (/(.mtl)/g.test(url[i]) == true) {
+			var objRegex = (/(.mtl)/g.test(url[i]));   //REGEX CHECK FOR .MTL
+			console.log("The RESULT OF THE CHECK IS: " + objRegex); // TRUE/FALSE
+			console.log("OUR INTERATIONS ARE: " + url[i]); 	// LOG WHATS IN ARRAY/INTERATED
+
+			if (objRegex == true) {
+				var result = url[i];	// the mtl string target
+				console.log(result);
 				console.log("MTL FOUND");
-				return url[i];
-			}
-			else {
-				console.log("ERROR NO MTL IN ARRAY!");
-				return;
+				return result;
 			}
 		}
+		console.log(url);		//ALTERNATIVE ERROR CATCH
+		console.log("ERROR NO MTL IN ARRAY!");
+		return;
+
 	}//end function declaration
 
 function ModelLoader(url) {
@@ -40,8 +52,8 @@ function ModelLoader(url) {
 		if (typeof url === 'object') {    // typeof conventions object = array
 			// if input into modelloader is array then proceed with function
 			console.log("function start");
-			var OBRARY = findOBJ(url);
-			this.loadObj(OBRARY);
+			var ObraryObj = findOBJ(url);
+			this.loadObj(ObraryObj);
 
 			findMTL(url);
 			console.log("function completed");
@@ -53,7 +65,7 @@ function ModelLoader(url) {
 
 			switch (extname) {
 				case '.obj':
-					console.log("loading this non obrary obj" + url);
+					console.log("loading this: " + url);
 					this.loadObj(url);
 					console.log(url);
 					break;

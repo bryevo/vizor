@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="716d5cd4-da08-4614-a438-9fa00ea1939d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump.rdb" afterPath="$PROJECT_DIR$/dump.rdb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/browser/plugins/obj_mtl_model_loader.plugin.js" afterPath="$PROJECT_DIR$/browser/plugins/obj_mtl_model_loader.plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/browser/plugins/three_loader_model.plugin.js" afterPath="$PROJECT_DIR$/browser/plugins/three_loader_model.plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/browser/scripts/loaders/assetLoader.js" afterPath="$PROJECT_DIR$/browser/scripts/loaders/assetLoader.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/browser/scripts/loaders/modelLoader.js" afterPath="$PROJECT_DIR$/browser/scripts/loaders/modelLoader.js" />
     </list>
     <ignored path="vizorlocal.iws" />
@@ -42,7 +39,7 @@
       <file leaf-file-name="three_loader_model.plugin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/browser/plugins/three_loader_model.plugin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
+            <state relative-caret-position="450">
               <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
               <folding />
             </state>
@@ -52,8 +49,8 @@
       <file leaf-file-name="obj_mtl_model_loader.plugin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/browser/plugins/obj_mtl_model_loader.plugin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
+            <state relative-caret-position="270">
+              <caret line="80" column="51" selection-start-line="80" selection-start-column="51" selection-end-line="80" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -62,8 +59,8 @@
       <file leaf-file-name="modelLoader.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/browser/scripts/loaders/modelLoader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+            <state relative-caret-position="270">
+              <caret line="36" column="44" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -72,7 +69,7 @@
       <file leaf-file-name="assetLoader.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/browser/scripts/loaders/assetLoader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
+            <state relative-caret-position="465">
               <caret line="31" column="98" selection-start-line="31" selection-start-column="98" selection-end-line="31" selection-end-column="98" />
               <folding />
             </state>
@@ -705,12 +702,12 @@
       <workItem from="1469139540259" duration="3624000" />
       <workItem from="1469476825209" duration="2179000" />
       <workItem from="1469559215445" duration="31744000" />
-      <workItem from="1469676933802" duration="9603000" />
+      <workItem from="1469676933802" duration="13000000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58592000" />
+    <option name="totallyTimeSpent" value="61989000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1078,22 +1075,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/browser/scripts/loaders/assetLoader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="31" column="98" selection-start-line="31" selection-start-column="98" selection-end-line="31" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/browser/plugins/three_loader_model.plugin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/browser/scripts/abstractPlugins/abstractThreeLoaderObjPlugin.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1102,18 +1083,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/browser/scripts/loaders/assetLoader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="98" selection-start-line="31" selection-start-column="98" selection-end-line="31" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/browser/plugins/three_loader_model.plugin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/browser/plugins/obj_mtl_model_loader.plugin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
+        <state relative-caret-position="270">
+          <caret line="80" column="51" selection-start-line="80" selection-start-column="51" selection-end-line="80" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/browser/scripts/loaders/modelLoader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+        <state relative-caret-position="270">
+          <caret line="36" column="44" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
           <folding />
         </state>
       </provider>
