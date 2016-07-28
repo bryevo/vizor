@@ -59,7 +59,8 @@
         if (slot.index === 0) {
             if (data)
                 this.inputarray = data;
-            console.log("array is: " + this.inputarray);
+            console.log("Array is: " + this.inputarray);  //check what array contains
+            console.log(" DATA SUCCESSFULLY GIVEN TO INPUT ARRAY IN objmtlloader");
         }
     };
 
@@ -77,7 +78,7 @@
         //
         //E2.core.assetLoader.loadAsset('model', this.state.url).then(function(asset) {
         E2.core.assetLoader.loadAsset('model', this.inputarray).then(function(asset) {
-            debugger;
+
             that.onObjLoaded(asset.geometries, asset.materials)
         })
 

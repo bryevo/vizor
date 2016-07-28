@@ -3,33 +3,43 @@
 if (typeof(module) !== 'undefined')
 	E2.Loader = require('./loader.js').Loader
 
+	function loadArray(url) {
+			var i;
+			var found = $.inArray('.obj', url) > -1;
+			// for(i = 0; i < url.length; i++ ){
+				// if(url.includes('.obj') == true){
+				// 	console.log("function call");
+				// 	this.loadObj(url[i]);
+				// 	return;
+				if(found == true) {
+					console.log("function call");
+					return;
+				}
+				else{
+					console.log("ERROR NO OBJ IN ARRAY!");
+					return;
+				}
+			}//end function declaration
+
 function ModelLoader(url) {
 	E2.Loader.apply(this, arguments)
-
-	var extname;
-		if (typeof url === 'object') {
-		console.log("this is an array!");
-				for (i = 0; i < url.length; i++) {
-					extname = url[i].substring(url[i].lastIndexOf('.')).toLowerCase();
-					console.log(url[i]);
-					if (extname = '.obj') {
-
-						this.loadObj(url[0]);
-					}
-				// 	else if (extname = '.mtl'){
-                //
-				// 	}
-				// debugger;
-				}
-
-	}
+	console.log("INPUT: "+ typeof url);
+		if (typeof url === 'object') {    // typeof conventions object = array
+			// if input into modelloader is array then proceed with promise
+			console.log("function start");
+			loadArray(url);
+			console.log("completed");
+			debugger;
+		}
 		else{
-		console.log("this is a"+ typeof url);
+		console.log("LOADING NORMAL NON ARRAY OBJECTS");
 		extname = url.substring(url.lastIndexOf('.')).toLowerCase();
 	}
 	switch(extname) {
 		case '.obj':
-			this.loadObj(url)
+			console.log("loading this non obrary obj" + url);
+			this.loadObj(url);
+			debugger;
 			break;
 		case '.js':
 		case '.json':
