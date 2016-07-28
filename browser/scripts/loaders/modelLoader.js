@@ -3,37 +3,50 @@
 if (typeof(module) !== 'undefined')
 	E2.Loader = require('./loader.js').Loader
 
-	function loadArray(url) {
-			var i;
-			var found = $.inArray('.obj', url) > -1;
-			// for(i = 0; i < url.length; i++ ){
-				// if(url.includes('.obj') == true){
-				// 	console.log("function call");
-				// 	this.loadObj(url[i]);
-				// 	return;
-				if(found == true) {
-					console.log("function call");
-					return;
-				}
-				else{
-					console.log("ERROR NO OBJ IN ARRAY!");
-					return;
-				}
-			}//end function declaration
+	function findOBJ(url) {
+	var i;
+	for (i = 0; i < url.length; i++) {
+		if (/(.obj)/g.test(url[i]) == true) {
+			console.log("OBJ FOUND");
+			var result = url[i];
+			console.log(result);
+			return result;
+		}
+		else {
+			console.log("ERROR NO OBJ IN ARRAY!");
+			return;
+		}
+	}
+}//end function declaration
+	function findMTL(url) {
+		var i;
+		for (i = 0; i < url.length; i++) {
+			if (/(.mtl)/g.test(url[i]) == true) {
+				console.log("MTL FOUND");
+				return url[i];
+			}
+			else {
+				console.log("ERROR NO MTL IN ARRAY!");
+				return;
+			}
+		}
+	}//end function declaration
 
 function ModelLoader(url) {
 	E2.Loader.apply(this, arguments)
 	console.log("INPUT: "+ typeof url);
 		if (typeof url === 'object') {    // typeof conventions object = array
-			// if input into modelloader is array then proceed with promise
+			// if input into modelloader is array then proceed with function
 			console.log("function start");
-			loadArray(url);
-			console.log("completed");
+			findOBJ(url);
+			debugger;
+			findMTL(url);
+			console.log("function completed");
 			debugger;
 		}
 		else{
 		console.log("LOADING NORMAL NON ARRAY OBJECTS");
-		extname = url.substring(url.lastIndexOf('.')).toLowerCase();
+		extname = url.substring(url.lastIndexOf('.')).toLowerCase();  //will continue to switch statement
 	}
 	switch(extname) {
 		case '.obj':

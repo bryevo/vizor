@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="716d5cd4-da08-4614-a438-9fa00ea1939d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump.rdb" afterPath="$PROJECT_DIR$/dump.rdb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/browser/plugins/obj_mtl_model_loader.plugin.js" afterPath="$PROJECT_DIR$/browser/plugins/obj_mtl_model_loader.plugin.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/browser/scripts/loaders/modelLoader.js" afterPath="$PROJECT_DIR$/browser/scripts/loaders/modelLoader.js" />
     </list>
     <ignored path="vizorlocal.iws" />
@@ -60,8 +58,8 @@
       <file leaf-file-name="modelLoader.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/browser/scripts/loaders/modelLoader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+            <state relative-caret-position="495">
+              <caret line="36" column="39" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -693,12 +691,12 @@
       <workItem from="1469139540259" duration="3624000" />
       <workItem from="1469476825209" duration="2179000" />
       <workItem from="1469559215445" duration="31744000" />
-      <workItem from="1469676933802" duration="4618000" />
+      <workItem from="1469676933802" duration="6568000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53607000" />
+    <option name="totallyTimeSpent" value="55557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1074,18 +1072,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/browser/plugins/three_loader_model.plugin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/browser/dist/engine.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="6297" column="41" selection-start-line="6297" selection-start-column="41" selection-end-line="6297" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/browser/plugins/three_loader_model.plugin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1100,8 +1098,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/browser/scripts/loaders/modelLoader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+        <state relative-caret-position="495">
+          <caret line="36" column="39" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
           <folding />
         </state>
       </provider>
