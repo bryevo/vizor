@@ -6,7 +6,27 @@ if (typeof(module) !== 'undefined')
 function ModelLoader(url) {
 	E2.Loader.apply(this, arguments)
 
-	var extname = url.substring(url.lastIndexOf('.')).toLowerCase()
+	var extname;
+		if (typeof url === 'object') {
+		console.log("this is an array!");
+				for (i = 0; i < url.length; i++) {
+					extname = url[i].substring(url[i].lastIndexOf('.')).toLowerCase();
+					console.log(url[i]);
+					if (extname = '.obj') {
+
+						this.loadObj(url[0]);
+					}
+				// 	else if (extname = '.mtl'){
+                //
+				// 	}
+				// debugger;
+				}
+
+	}
+		else{
+		console.log("this is a"+ typeof url);
+		extname = url.substring(url.lastIndexOf('.')).toLowerCase();
+	}
 	switch(extname) {
 		case '.obj':
 			this.loadObj(url)
@@ -37,8 +57,8 @@ ModelLoader.prototype.loadObject3D = function(url) {
 }
 
 ModelLoader.prototype.loadObj = function(url) {
-	var that = this
-	var mtlUrl = url.replace('.obj', '.mtl')
+	var that = this;
+	var mtlUrl = url.replace('.obj', '.mtl');
 
 	$.get('/stat' + mtlUrl, function(data) {
 		if (data.error === undefined) {

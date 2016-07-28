@@ -1,6 +1,6 @@
 (function() {
     function progress() {
-        console.log('Loading progress', this.state.url, arguments)
+        console.log('Loading progress', this.inputarray, arguments)
     }
 
     function errorHandler(err) {
@@ -11,7 +11,7 @@
         AbstractThreeLoaderObjPlugin.apply(this, arguments)
 
         this.input_slots = [
-            {name: 'array', dt: core.datatypes.ARRAY}
+            {name: 'array', dt: core.datatypes.ANY, array: true}
         ];
     }
 
@@ -57,11 +57,11 @@
     // };
     ArraytoOBJLoaderPlugin.prototype.update_input = function(slot, data) {
         if (slot.index === 0) {
-            debugger;
-            if (data && data.length)
+            if (data)
                 this.inputarray = data;
+            console.log("array is: " + this.inputarray);
         }
-    }
+    };
 
     ArraytoOBJLoaderPlugin.prototype.update_state = function() {
         if (!this.dirty)
@@ -76,9 +76,8 @@
         this.materials = this.getDefaultMaterials();
         //
         //E2.core.assetLoader.loadAsset('model', this.state.url).then(function(asset) {
-        E2.core.assetLoader.loadAsset('model', this.inputarray.value).then(function(asset) {
+        E2.core.assetLoader.loadAsset('model', this.inputarray).then(function(asset) {
             debugger;
-
             that.onObjLoaded(asset.geometries, asset.materials)
         })
 

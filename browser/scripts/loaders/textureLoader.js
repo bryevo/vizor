@@ -13,9 +13,9 @@ TextureLoader.prototype.onImageLoaded = function(img, metadata) {
 	texture.image = img
 	texture.needsUpdate = true
 
-	texture.vizorMetadata = metadata
+	texture.vizorMetadata = metadata;
 
-	this.emit('loaded', texture)
+	this.emit('loaded', texture);
 }
 
 E2.Loaders.TextureLoader = TextureLoader
