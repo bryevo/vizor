@@ -2,14 +2,16 @@
     function progress() {
         console.log('Loading progress', input_array, arguments)
     }
-var input_array = []; //GLOBAL ARRAY
+    var input_array = []; //GLOBAL ARRAY
+    var input_obj;
+    var input_mtl;
 
     function errorHandler(err) {
         msg('ERROR: '+err.toString())
     }
 
     var ArraytoOBJLoaderPlugin = E2.plugins.obj_mtl_model_loader = function(core) {
-        AbstractThreeLoaderObjPlugin.apply(this, arguments)
+        AbstractThreeLoaderObjPlugin.apply(this, arguments);
 
         this.input_slots = [
             {name: 'object', dt: core.datatypes.TEXT},
@@ -27,40 +29,10 @@ var input_array = []; //GLOBAL ARRAY
         return [new THREE.Geometry()]
     }
 
-    // ThreeLoaderModelPlugin.prototype.create_ui = function() {
-    // 	var inp = makeButton('Change', 'No model selected.', 'url');
-    // 	var that = this;
-    //
-    // 	inp.click(function() {
-    // 		var oldValue = that.state.url;
-    // 		var newValue;
-    //
-    // 		FileSelectControl.createSceneSelector(that.state.url).onChange(function(v) {
-    // 				newValue = that.state.url = v;
-    // 				that.state_changed(null);
-    // 				that.state_changed(inp);
-    // 				that.updated = true;
-    //
-    // 				E2.track({
-    // 					event: 'assetChanged',
-    // 					plugin: 'ThreeLoaderModelPlugin',
-    // 					url: v
-    // 				})
-    // 			})
-    // 			.on('closed', function() {
-    // 				if (newValue === oldValue)
-    // 					return;
-    //
-    // 				that.undoableSetState('url', newValue, oldValue)
-    // 			})
-    // 	});
-    //
-    // 	return inp
-    // };
     ArraytoOBJLoaderPlugin.prototype.update_input = function(slot, data) {
         if (slot.index === 0) {
             if (data)
-                input_obj = data;
+                input_obj = data;                               //push slots to array
             console.log("OBJ is: " + input_obj);
 
         }
@@ -87,14 +59,13 @@ var input_array = []; //GLOBAL ARRAY
         this.materials = this.getDefaultMaterials();
         //
         //E2.core.assetLoader.loadAsset('model', this.state.url).then(function(asset) {
-        console.log(" DATA SUCCESSFULLY GIVEN TO INPUT ARRAY IN objmtlloader");
 
         E2.core.assetLoader
             .loadAsset('model', input_array)
             .then(function(asset) {
                 that.onObjLoaded(asset.geometries, asset.materials)
-            })
-        console.log("the input array:" + input_array)
+            });
+        console.log("The input array:" + input_array);
 
         this.dirty = false
     }
