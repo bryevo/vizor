@@ -79,7 +79,7 @@ FileSelectControl.prototype.url = function(url) {
 FileSelectControl.prototype.files = function(files) {
 	var items = files.map(function(file) {
 		if (typeof(file) === 'string')
-			return { path: file }
+			return { path: file };
 
 		return file
 	})

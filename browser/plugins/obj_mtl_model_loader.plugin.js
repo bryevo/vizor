@@ -12,7 +12,8 @@ var input_array = []; //GLOBAL ARRAY
         AbstractThreeLoaderObjPlugin.apply(this, arguments)
 
         this.input_slots = [
-            {name: 'array', dt: core.datatypes.ANY, array: true}
+            {name: 'object', dt: core.datatypes.TEXT},
+            {name: 'material', dt: core.datatypes.TEXT}
         ];
     }
 
@@ -59,8 +60,14 @@ var input_array = []; //GLOBAL ARRAY
     ArraytoOBJLoaderPlugin.prototype.update_input = function(slot, data) {
         if (slot.index === 0) {
             if (data)
-                input_array = data;
-            console.log("Array is: " + input_array);  //check what array contains
+                input_obj = data;
+            console.log("OBJ is: " + input_obj);
+
+        }
+        if (slot.index === 1) {
+            if (data)
+                input_mtl = data;
+            console.log("MTL is: " + input_mtl);
 
         }
     };
@@ -69,10 +76,11 @@ var input_array = []; //GLOBAL ARRAY
         if (!this.dirty)
             return;
 
-        if (!input_array) {
-            console.log("Please reconnect");
+        if (!input_obj || !input_mtl){
             return;
         }
+        
+        input_array = [input_obj, input_mtl];
         var that = this;
 
         this.geometries = this.getDefaultGeometries();
@@ -86,7 +94,7 @@ var input_array = []; //GLOBAL ARRAY
             .then(function(asset) {
                 that.onObjLoaded(asset.geometries, asset.materials)
             })
-        console.log("loading array complete");
+        console.log("the input array:" + input_array)
 
         this.dirty = false
     }
