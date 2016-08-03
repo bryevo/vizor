@@ -72,6 +72,7 @@ var remote = request.agent(remoteHttp)
 var local = request.agent(localHttp)
 
 function sendGraph(path, graphData, cb) {
+	debugger;
 	return local.post('/graph').send({
 		path: path,
 		private: false,

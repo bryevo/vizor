@@ -42,7 +42,7 @@
 	}
 
 	ModelLoader.prototype.loadObj = function(urls) {
-		var that = this
+		var that = this;
 
 		if (Array.isArray(urls)){  //if missing mtl
 			if (urls.length <2) {

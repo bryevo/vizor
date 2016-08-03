@@ -8,14 +8,16 @@
 <body style="width:800px;margin: 0 auto">
 <h1>postMessage</h1>
 
-<script src="http://vizor.io/scripts/embed.js" data-vizorurl="http://vizor.io/vo/postmessage-obj?autoplay=1" ></script>
+<script src="http://vizor.io/scripts/embed.js" data-vizorurl="https://54842c49.ngrok.io/bryevo/test01?autoplay=1" ></script>
 
 VR Mode:<input id="toggle" type="checkbox" />
 
 Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 2<input id="pos2" name="pos" type="radio" value="1"/>
 3 <input id="pos3" name="pos" type="radio" value="2"/>
-4 <input id="pos4" name="pos" type="radio" value="3"/><br/>
+4 <input id="pos4" name="pos" type="radio" value="3"/>
+5 <input id="pos5" name="pos" type="radio" value="4"/>
+6 <input id="pos6" name="pos" type="radio" value="5"/><br/>
 <input type="button" id="geo"</input>
 <br>
     <pre id="log">
@@ -28,6 +30,8 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
     var $position2 = $('#pos2');
     var $position3 = $('#pos3');
     var $position4 = $('#pos4');
+    var $position5 = $('#pos5');
+    var $position6 = $('#pos6');
     var $geometry = $('#geo');
 
     // the embed script will create an iframe but right now one isn't available
@@ -103,6 +107,28 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
             name: 'cam_index'
         })
     })
+    $position5.on('click', function(e) {
+        send({
+            command: 'setVariable',
+            name: 'cam_index',
+            value: e.currentTarget.value
+        })
+        send({
+            command: 'getVariable',
+            name: 'cam_index'
+        })
+    })
+    $position6.on('click', function(e) {
+        send({
+            command: 'setVariable',
+            name: 'cam_index',
+            value: e.currentTarget.value
+        })
+        send({
+            command: 'getVariable',
+            name: 'cam_index'
+        })
+    })
     $geometry.on('click', function (e){
         console.log(themesh);
         if (themesh !== 'undefined') {
@@ -127,7 +153,7 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 </script>
 
 <script>
-    var boxTexture = new THREE.ImageUtils.loadTexture("assets/business-card-box01.jpg",{},
+    var boxTexture = new THREE.ImageUtils.loadTexture("assets/business-card-box.jpg",{},
             /* Success*/
             function () {
                 console.log("Texture Loaded");
@@ -160,8 +186,8 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 var themesh;
     var completionCallback = function (objects) {
         debugger;
-        console.log(objects.geometry.toJSON);
-        themesh = objects.geometry.toJSON;
+        console.log(objects);
+        themesh = objects;
     };
 </script>
 </body>

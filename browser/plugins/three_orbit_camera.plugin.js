@@ -120,7 +120,6 @@
 			this.positionFromGraph.y + this.state.position.y,
 			this.positionFromGraph.z + this.state.position.z)
 
-
 		this.object3d.quaternion.setFromEuler(this.rotationFromGraph)
 		this.object3d.quaternion.multiply(this.state.quaternion)
 
@@ -128,10 +127,9 @@
 			this.orbitControlCamera.updateProjectionMatrix()
 
 		this.object3d.updateMatrixWorld()
-		this.orbitControlCamera.lookAt();
-		this.updated = true;
-	}
 
+		this.updated = true
+	}
 
 	ThreeOrbitCameraPlugin.prototype.update_input = function(slot, data) {
 		if (!this.object3d) {
@@ -204,4 +202,3 @@
 	}
 
 })()
-

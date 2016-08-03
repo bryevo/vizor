@@ -1,5 +1,6 @@
-E2.p = E2.plugins["variable_string"] = function(core, node)
+E2.p = E2.plugins["obrary_variable_string"] = function(core, node)
 {
+    debugger;
 
     var typeMeta = {
         "url": "/variableString",
