@@ -642,7 +642,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function handleTouchMovePan( event ) {
 
-		//console.log( 'handleTouchMovePan' );
+		console.log(handleTouchMovePan);
 
 		panEnd.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
 

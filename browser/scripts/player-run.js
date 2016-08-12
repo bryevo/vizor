@@ -39,12 +39,12 @@ window.addEventListener('message', function(e) {
 		case 'getVariable':
 			send({
 				name: e.data.name, 
-				value: E2.app.player.getVariableValue(e.data.name)
+				value: E2.app.player.getVariables(e.data.name)
 			})
 			break;
 
 		case 'setVariable':
-			E2.app.player.setVariableValue(e.data.name, e.data.value)
+			E2.app.player.setVariables(e.data.name, e.data.value)
 			break;
 	}
 }, false)

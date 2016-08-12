@@ -8,7 +8,7 @@
 <body style="width:800px;margin: 0 auto">
 <h1>postMessage</h1>
 
-<script src="http://vizor.io/scripts/embed.js" data-vizorurl="https://54842c49.ngrok.io/bryevo/test01?autoplay=1" ></script>
+<script src="http://vizor.io/scripts/embed.js" data-vizorurl="http://f91876de.ngrok.io/bryevo/test01-d?autoplay=1" ></script>
 
 VR Mode:<input id="toggle" type="checkbox" />
 
@@ -19,6 +19,7 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 5 <input id="pos5" name="pos" type="radio" value="4"/>
 6 <input id="pos6" name="pos" type="radio" value="5"/><br/>
 <input type="button" id="geo"</input>
+<input type="button" id="orbitorigin" /> <br/>
 <br>
     <pre id="log">
     </pre>
@@ -33,6 +34,7 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
     var $position5 = $('#pos5');
     var $position6 = $('#pos6');
     var $geometry = $('#geo');
+    var $origin = $('#orbitorigin');
 
     // the embed script will create an iframe but right now one isn't available
     // so we defer setting this until send()
@@ -46,7 +48,7 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
         if (!$vizor) {
             $vizor = $('iframe').first()
         }
-        console.log(message.data);
+//        console.log(message.data);
         log('OUT: '+ JSON.stringify(message));
         $vizor[0].contentWindow.postMessage(message, '*')
     }
@@ -55,78 +57,78 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 
         send({
             command: 'setVariable',
-            name: 'cam_state',
+            name: 'cameraToggle',
             value: e.currentTarget.checked
         })
         send({
             command: 'getVariable',
-            name: 'cam_state'
+            name: 'cameraToggle'
         })
     })
     $position1.on('click', function(e) {
         send({
             command: 'setVariable',
-            name: 'cam_index',
+            name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
             command: 'getVariable',
-            name: 'cam_index'
+            name: 'cameraIndex'
         })
     })
     $position2.on('click', function(e) {
         send({
             command: 'setVariable',
-            name: 'cam_index',
+            name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
             command: 'getVariable',
-            name: 'cam_index'
+            name: 'cameraIndex'
         })
     })
     $position3.on('click', function(e) {
         send({
             command: 'setVariable',
-            name: 'cam_index',
+            name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
             command: 'getVariable',
-            name: 'cam_index'
+            name: 'cameraIndex'
         })
     })
     $position4.on('click', function(e) {
         send({
             command: 'setVariable',
-            name: 'cam_index',
+            name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
             command: 'getVariable',
-            name: 'cam_index'
+            name: 'cameraIndex'
         })
     })
     $position5.on('click', function(e) {
         send({
             command: 'setVariable',
-            name: 'cam_index',
+            name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
             command: 'getVariable',
-            name: 'cam_index'
+            name: 'cameraIndex'
         })
     })
     $position6.on('click', function(e) {
         send({
             command: 'setVariable',
-            name: 'cam_index',
+            name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
             command: 'getVariable',
-            name: 'cam_index'
+            name: 'cameraIndex'
         })
     })
     $geometry.on('click', function (e){
@@ -146,6 +148,17 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
         {
             console.log("error");
         }
+    });
+    $origin.on('click', function(e) {
+        send({
+            command: 'setVariable',
+            name: 'orb_origin',
+            value: e.currentTarget.value
+        })
+        send({
+            command: 'getVariable',
+            name: 'orb_origin'
+        })
     });
     window.addEventListener('message', function(e) {
         log('IN: ' + JSON.stringify(e.data))

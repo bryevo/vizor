@@ -333,30 +333,62 @@ Core.prototype.deserialiseObject = function(d) {
 
 Core.prototype.deserialise = function(str) {
 	return this.deserialiseObject(JSON.parse(str))
-}
+};
+
+Core.prototype.getVariable = function() {
+	function getVar(graph, name) {
+		var nodes = graph.nodes;
+		if (graph.parent_graph) {
+			var ptn = graph.parent_graph.tree_node;
+			var tnode = new TreeNode(ptn.tree, ptn, name, graph);
+
+			ptn.children.push(tnode);
+		}
+		for (var i = 0, len = nodes.length; i < len; i++) {
+			var n = nodes[i];
+			console.log(n.title);
+			if (n.plugin.isGraph) {
+				console.log(n.title);
+				var vrbl = n.plugin.graph.nodes;
+				for (var j = 0, length = vrbl.length; j < length; j++) {
+					// console.log(v);
+					var v = vrbl[j];
+					if (v.plugin.id === 'variable_local_write') {
+						console.log("Read variable " + v.get_disp_name());
+					}
+					if (v.plugin.id === 'variable_local_read') {
+						console.log("Write variable " + v.get_disp_name());
+					}
+				}
+				getVar(n.plugin.graph, n.get_disp_name());
+			}
+		}
+	}
+};
 
 Core.prototype.rebuild_structure_tree = function() {
 	function build(graph, name) {
 		var nodes = graph.nodes;
-		
 		if (graph.parent_graph) {
 			var ptn = graph.parent_graph.tree_node;
 			var tnode = new TreeNode(ptn.tree, ptn, name, graph);
-			
+
 			ptn.children.push(tnode);
 		}
-		
-		for(var i = 0, len = nodes.length; i < len; i++) {
+		for (var i = 0, len = nodes.length; i < len; i++) {
 			var n = nodes[i];
-
-			if(n.plugin.isGraph)
+			if (n.plugin.isGraph) {
+				var vrbl = n.plugin.graph.variables;
+				console.log(vrbl);
 				build(n.plugin.graph, n.get_disp_name());
+				// console.log(n.title);
+			}
 		}
 	}
 
-	if (!E2.dom.structure)
+	if (!E2.dom.structure) {
 		return;
-
+	}
 	E2.dom.structure.tree.reset();
 	this.root_graph.tree_node = E2.dom.structure.tree.root;
 	E2.dom.structure.tree.root.graph = this.root_graph;

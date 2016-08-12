@@ -21,7 +21,7 @@ if (argv._.length < 3) {
 			- assetType is image, scene, audio, json, ...
 
 		$ node tools/upload.js /Downloads/JPEG/ localhost:8000 image
-	`)
+	`);
 
 	process.exit(1)
 }

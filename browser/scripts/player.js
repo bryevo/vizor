@@ -1,6 +1,6 @@
 function Player() {
 	var that = this
-	
+
 	this.state = {
 		STOPPED: 0,
 		PLAYING: 1,
@@ -8,6 +8,8 @@ function Player() {
 		LOADING: 3
 	}
 
+
+	this.variableIndex = {}
 	this.app = E2.app
 	this.core = E2.core
 
@@ -29,14 +31,75 @@ function Player() {
 
 	this.frames = 0
 	this.scheduled_stop = null
-	
+
 	this.core.active_graph = this.core.root_graph = new Graph(this.core, null, 'root')
 	this.core.graphs.push(this.core.root_graph)
-	
+
 	E2.core.on('ready', function() {
 		that.select_active_graph()
+		console.log("YAY, I can tell when the graph is loaded");
 	})
+
+	E2.core.on('player:playing', function(){
+		console.log("YAY i can subscribe to player events!!!!")
+
+		that.buildVariableIndex();
+		Player.prototype.getVariables = function (variableName) {
+			var that = this;
+			if (!this.variableIndex[variableName].name) {
+				//the name was not found in the index
+				return [];
+			}
+			else {
+				return that.variableIndex[variableName[0].name]
+			}
+		};
+		Player.prototype.setVariables = function(variableName, value) {
+			var that = this;
+			if (!this.variableIndex[name]) {
+				return;
+				//unfortunately non-event
+			}
+			else {
+				return that.variableIndex[variableName[0].variable.value];
+			}
+		};
+
+	});
 }
+
+Player.prototype.buildVariableIndex = function(){
+	var that = this;
+	var nodes = this.core.graphs;
+	var variableHeap = [];
+
+	//inserts local function to recurse with here
+	function processNodes(nodes){
+		for (var i = 0, len = nodes.length; i < len; i++) {
+			Object.keys(nodes[i].variables.variables).forEach(function (variableItem) {
+				variableHeap.push({"nodesid": nodes[i].uid, "name": variableItem,  "variable": nodes[i].variables.variables[variableItem]})
+			});
+			//if something recurse
+			if(nodes[i].isVariable){
+				processNodes(nodes[i]);
+			}
+		}
+	}
+	//step into the rabbit hole
+	processNodes(nodes);
+
+	//once we're done recursing, let's build the master variable index
+	variableHeap.forEach(function (variableObject) {
+		if (!that.variableIndex[variableObject.name]) {
+			that.variableIndex[variableObject.name] = [variableObject]; //<-- since this is the first one
+		}
+		else {
+			that.variableIndex[variableObject.name].push(variableObject); //<-- since the key in the index already exists
+		}
+	});
+
+	return that.variableIndex;
+};
 
 Player.prototype.play = function() {
 	if (this.current_state === this.state.PLAYING)
@@ -57,7 +120,7 @@ Player.prototype.play = function() {
 
 Player.prototype.pause = function() {
 	this.current_state = this.state.PAUSED
-	
+
 	this.core.root_graph.pause()
 }
 
@@ -70,7 +133,7 @@ Player.prototype.stop = function() {
 		cancelAnimFrame(this.interval)
 		this.interval = null
 	}
-	
+
 	this.core.root_graph.stop()
 
 	this.abs_time = 0.0
@@ -79,7 +142,7 @@ Player.prototype.stop = function() {
 	this.core.abs_t = 0.0
 
 	this.core.root_graph.reset()
-	
+
 	if (E2.app && E2.app.updateCanvas)
 		E2.app.updateCanvas(false)
 }
@@ -104,7 +167,7 @@ Player.prototype.on_update = function() {
 
 	var time = this.current_state !== this.state.PAUSED ? Date.now() : this.last_time
 	var delta_t = (time - this.last_time) * 0.001
-	
+
 	if(this.core.update(this.abs_time, delta_t) && E2.app.updateCanvas)
 		E2.app.updateCanvas(false)
 
@@ -175,7 +238,7 @@ Player.prototype.add_parameter_listener = function(id, listener) {
 		variable_dt_changed: function() {},
 		variable_updated: function(h) { return function(value) { h(value) }}(listener)
 	}
-	
+
 	this.core.root_graph.variables.lock(l, id)
 	return l
 }
@@ -231,21 +294,21 @@ function CreatePlayer(cb) {
 		}
 
 		var m = 'ERROR: Script exception:\n'
-		
+
 		if(ex.fileName)
 			m += '\tFilename: ' + ex.fileName
 
 		if(ex.lineNumber)
 			m += '\tLine number: ' + ex.lineNumber
-		
+
 		if(ex.message)
 			m += '\tMessage: ' + ex.message
 
 		console.log(m)
 	})
-	
+
 	E2.core = new Core()
-	
+
 	E2.dom.webgl_canvas = $('#webgl-canvas')
 	if (E2.dom.webgl_canvas.length < 1)
 		return
@@ -279,7 +342,7 @@ function CreatePlayer(cb) {
 
 	E2.core.glContext = E2.dom.webgl_canvas[0].getContext('webgl', gl_attributes) ||
 		E2.dom.webgl_canvas[0].getContext('experimental-webgl', gl_attributes)
-	
+
 	E2.core.renderer = new THREE.WebGLRenderer({
 		context: E2.core.glContext,
 		canvas: E2.dom.webgl_canvas[0]

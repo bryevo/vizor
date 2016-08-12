@@ -133,6 +133,10 @@ Node.prototype.get_disp_name = function() {
 	return !this.title ? this.id : this.title;
 }
 
+// Node.prototype.get_var_name = function() {
+// 	return !this.title ? this.id : this.title;
+// }
+
 Node.prototype.reset = function() {
 	var p = this.plugin
 

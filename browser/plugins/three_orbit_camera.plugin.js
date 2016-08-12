@@ -31,7 +31,8 @@
 		this.output_slots = [
 			{name: 'camera',	dt: core.datatypes.CAMERA},
 			{name: 'position',	dt: core.datatypes.VECTOR},
-			{name: 'rotation',	dt: core.datatypes.VECTOR}
+			{name: 'rotation',	dt: core.datatypes.VECTOR},
+			{name: 'origin position', dt: core.datatypes.VECTOR}
 		]
 
 		this.always_update = true
@@ -50,6 +51,7 @@
 
 		this.outputRotationEuler = new THREE.Euler()
 		this.outputPosition = new THREE.Vector3()
+		this.outputOrigin = new THREE.Vector3();
 	}
 
 	ThreeOrbitCameraPlugin.prototype = Object.create(Plugin.prototype)
@@ -88,10 +90,9 @@
 		this.object3d.position.set(this.state.position.x, this.state.position.y, this.state.position.z)
 		this.object3d.quaternion.set(this.state.quaternion._x, this.state.quaternion._y, this.state.quaternion._z, this.state.quaternion._w)
 
-		this.positionFromGraph.copy(this.inputValues.position)
-		this.orbitControlCamera.position.copy(this.inputValues.offset)
-
-		this.controls.update()
+		this.positionFromGraph.copy(this.inputValues.position);
+		this.orbitControlCamera.position.copy(this.inputValues.offset);
+		this.controls.update();
 	}
 
 	ThreeOrbitCameraPlugin.prototype.play = function() {
@@ -180,6 +181,10 @@
 			tempQuaternion.multiply(this.object3d.quaternion)
 			this.outputRotationEuler.setFromQuaternion(tempQuaternion, "YZX")
 			return this.outputRotationEuler
+		}
+		else if (slot.index === 3) { //origin
+			return this.controls.target;
+
 		}
 	}
 

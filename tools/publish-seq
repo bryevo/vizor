@@ -77,7 +77,9 @@ function minifyBuffer(code)
 
 function minify(src, dst)
 {
-	fs.writeFileSync(dst, minifyBuffer(fs.readFileSync(src, { encoding: 'utf8' })));
+	//fs.writeFileSync(dst, minifyBuffer(fs.readFileSync(src, { encoding: 'utf8' })));
+	fs.writeFileSync(dst, fs.readFileSync(src, { encoding: 'utf8' }));
+
 }
 
 function mkdirsSync(p)

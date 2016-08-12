@@ -2,6 +2,7 @@
 
 function Variables() {
 	this.variables = {}
+	this.isVariable = true;
 }
 
 Variables.prototype.lock = function(plugin, name, connections) {
