@@ -1,14 +1,14 @@
 <html>
 <head>
-    <script type="text/javascript" src="assets/js/three.js"></script>
-    <script type="text/javascript" src="assets/js/OBJLoader.js"></script>
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/player.js"></script>
+    <script type="text/javascript" src="scripts/player-run.js"></script>
 </head>
 
 <body style="width:800px;margin: 0 auto">
 <h1>postMessage</h1>
 
-<script src="http://vizor.io/scripts/embed.js" data-vizorurl="http://f91876de.ngrok.io/bryevo/test01-d?autoplay=1" ></script>
+<script src="http://vizor.io/scripts/embed.js" data-vizorurl="   http://510258c9.ngrok.io/bryevo/test01-copy?autoplay=1" ></script>
 
 VR Mode:<input id="toggle" type="checkbox" />
 
@@ -21,12 +21,12 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 <input type="button" id="geo"</input>
 <input type="button" id="orbitorigin" /> <br/>
 <br>
-    <pre id="log">
+<pre id="log">
     </pre>
 
-<script>
+<script type = "text/javascript">
+//    var $toggle = $('#toggle');
     var $log = $('#log');
-    var $toggle = $('#toggle');
     var $position1 = $('#pos1');
     var $position2 = $('#pos2');
     var $position3 = $('#pos3');
@@ -44,6 +44,7 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 //        debugger;
         $log.append(message + '<br>')
     }
+
     function send(message) {
         if (!$vizor) {
             $vizor = $('iframe').first()
@@ -52,27 +53,39 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
         log('OUT: '+ JSON.stringify(message));
         $vizor[0].contentWindow.postMessage(message, '*')
     }
-    $toggle.on('click', function(e) {
-        console.log(e.currentTarget.checked);
 
-        send({
-            command: 'setVariable',
-            name: 'cameraToggle',
-            value: e.currentTarget.checked
-        })
-        send({
-            command: 'getVariable',
-            name: 'cameraToggle'
-        })
+    $(function(){//wakeup
+        var $myCheckbox = $("#toggle");
+        var myToggleStateVariable = {};
+
+        myToggleStateVariable = E2.app.player.getVariables("cameraToggle");
+
+    $myCheckbox.on('click', function(e) {
+        console.log(e.currentTarget.checked);
+        myToggleStateVariable.value = e.currentTarget.checked;
+        E2.app.player.setVariables([myToggleStateVariable]);
     })
+
+    });
+//    $toggle.on('click', function(e) {
+//        send({
+//            command: 'setVariables',
+//            name: 'cameraToggle',
+//            value: e.currentTarget.checked
+//        })
+//        send({
+//            command: 'getVariables',
+//            name: 'cameraToggle'
+//        })
+//    });
     $position1.on('click', function(e) {
         send({
-            command: 'setVariable',
+            command: 'setVariables',
             name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
-            command: 'getVariable',
+            command: 'getVariables',
             name: 'cameraIndex'
         })
     })
@@ -163,45 +176,6 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
     window.addEventListener('message', function(e) {
         log('IN: ' + JSON.stringify(e.data))
     }, false)
-</script>
-
-<script>
-    var boxTexture = new THREE.ImageUtils.loadTexture("assets/business-card-box.jpg",{},
-            /* Success*/
-            function () {
-                console.log("Texture Loaded");
-            },
-            /* FAILURE */
-            function (e) {
-                console.error(e);
-            });
-
-    var boxMaterial = new THREE.MeshPhongMaterial({
-        map: boxTexture,
-        shininess: 40
-    });
-
-    var modelloader = new THREE.OBJLoader();
-    modelloader.load('assets/business-card-box.obj', oldCompletionCallback = function (impObject) {
-        var object = null;
-        impObject.children.forEach(function (child) {
-            if (child instanceof THREE.Mesh) {
-                object = new THREE.Mesh(new THREE.Geometry().fromBufferGeometry(child.geometry), boxMaterial);
-                //decalMesh.name = "impObject";
-                //scene.add(decalMesh);
-
-                //decalTargets.push(decalMesh);
-            }
-        });
-
-        completionCallback(object);
-    });
-var themesh;
-    var completionCallback = function (objects) {
-        debugger;
-        console.log(objects);
-        themesh = objects;
-    };
 </script>
 </body>
 </html>

@@ -42,32 +42,38 @@ function Player() {
 
 	E2.core.on('player:playing', function(){
 		console.log("YAY i can subscribe to player events!!!!")
-
-		that.buildVariableIndex();
-		Player.prototype.getVariables = function (variableName) {
-			var that = this;
-			if (!this.variableIndex[variableName].name) {
-				//the name was not found in the index
-				return [];
-			}
-			else {
-				return that.variableIndex[variableName[0].name]
-			}
-		};
-		Player.prototype.setVariables = function(variableName, value) {
-			var that = this;
-			if (!this.variableIndex[name]) {
-				return;
-				//unfortunately non-event
-			}
-			else {
-				return that.variableIndex[variableName[0].variable.value];
-			}
-		};
-
+	that.buildVariableIndex();
 	});
 }
+Player.prototype.setVariables = function(variablez) {
+	debugger;
+	var that = this;
 
+	if(!Array.isArray(variablez)) {
+		variablez = [variablez];
+	}
+	variablez.forEach(function(vrbl,index){
+	variablez.value = that.variableIndex[vrbl][index].variable.value;
+	var r = that.variableIndex[vrbl][index].variable;
+	var u = r.users;
+
+	for (var i = 0, len = u.length; i < len; i++) {
+		var plg = u[i];
+
+		if (plg.variable_updated){
+			plg.variable_updated(variablez.value);
+		}
+	}
+	});
+};
+Player.prototype.getVariables = function (variableName) {
+	var that = this;
+	return that.variableIndex[variableName].map(function (item, itemIdx, fullArray) {
+		//if element is function which cannot passed with postmessage //
+		var newvar = {"name": item.name, "nodesid": item.nodesid, "value": item.variable.value, "index": itemIdx};
+		return newvar.value;
+	});
+};
 Player.prototype.buildVariableIndex = function(){
 	var that = this;
 	var nodes = this.core.graphs;
@@ -226,10 +232,12 @@ Player.prototype.load_from_url = function(url, cb) {
 }
 
 Player.prototype.getVariableValue = function(id) {
+	debugger;
 	return this.core.root_graph.variables.read(id)
 }
 
 Player.prototype.setVariableValue = function(id, value) {
+	debugger;
 	this.core.root_graph.variables.write(id, value)
 }
 
