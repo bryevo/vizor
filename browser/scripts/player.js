@@ -52,16 +52,18 @@ Player.prototype.setVariables = function(variablez) {
 	if(!Array.isArray(variablez)) {
 		variablez = [variablez];
 	}
-	variablez.forEach(function(vrbl,index){
-	variablez.value = that.variableIndex[vrbl][index].variable.value;
-	var r = that.variableIndex[vrbl][index].variable;
-	var u = r.users;
+	console.log
+	that.variableIndex[variablez[0].name].forEach(function(vrbl){
+		// that.variableIndex[variablez[0].name][index].remove(that.variableIndex[variablez[0].name][index].variable.value);
+		vrbl.variable.value = variablez[0].value;
+		var newvar = vrbl.variable;
+	var u = newvar.users;
 
 	for (var i = 0, len = u.length; i < len; i++) {
 		var plg = u[i];
 
 		if (plg.variable_updated){
-			plg.variable_updated(variablez.value);
+			plg.variable_updated(newvar.value);
 		}
 	}
 	});

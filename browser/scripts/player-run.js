@@ -43,7 +43,7 @@ window.addEventListener('message', function(e) {
 			})
 			break;
 		case 'setVariables':
-			E2.app.player.setVariables(e.data.name);
+			E2.app.player.setVariables([e.data]);
 			break;
 	}
 }, false)
