@@ -52,12 +52,10 @@ Player.prototype.setVariables = function(variablez) {
 	if(!Array.isArray(variablez)) {
 		variablez = [variablez];
 	}
-	console.log
 	that.variableIndex[variablez[0].name].forEach(function(vrbl){
-		// that.variableIndex[variablez[0].name][index].remove(that.variableIndex[variablez[0].name][index].variable.value);
 		vrbl.variable.value = variablez[0].value;
 		var newvar = vrbl.variable;
-	var u = newvar.users;
+		var u = newvar.users;
 
 	for (var i = 0, len = u.length; i < len; i++) {
 		var plg = u[i];

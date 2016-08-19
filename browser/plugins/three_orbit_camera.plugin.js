@@ -25,7 +25,8 @@
 			{ name: 'fov', dt: core.datatypes.FLOAT, def: this.defaultFOV },
 			{ name: 'aspectRatio', dt: core.datatypes.FLOAT, def: 1.0},
 			{ name: 'near', dt: core.datatypes.FLOAT, def: 0.001 },
-			{ name: 'far', dt: core.datatypes.FLOAT, def: 1000.0 }
+			{ name: 'far', dt: core.datatypes.FLOAT, def: 1000.0 },
+			{ name: 'origin position', dt: core.datatypes.VECTOR }
 		]
 
 		this.output_slots = [
@@ -51,7 +52,7 @@
 
 		this.outputRotationEuler = new THREE.Euler()
 		this.outputPosition = new THREE.Vector3()
-		this.outputOrigin = new THREE.Vector3();
+		this.originPosition = new THREE.Vector3();
 	}
 
 	ThreeOrbitCameraPlugin.prototype = Object.create(Plugin.prototype)
@@ -90,7 +91,7 @@
 		this.object3d.position.set(this.state.position.x, this.state.position.y, this.state.position.z)
 		this.object3d.quaternion.set(this.state.quaternion._x, this.state.quaternion._y, this.state.quaternion._z, this.state.quaternion._w)
 
-		this.positionFromGraph.copy(this.inputValues.position);
+	 	this.positionFromGraph.copy(this.inputValues.position);
 		this.orbitControlCamera.position.copy(this.inputValues.offset);
 		this.controls.update();
 	}
@@ -112,7 +113,7 @@
 		}
 
 		this.orbitControlCamera.aspect = wh.width / wh.height
-		this.orbitControlCamera.updateProjectionMatrix()
+		this.orbitControlCamera.updateProjectionMatrix();
 	}
 
 	ThreeOrbitCameraPlugin.prototype.update_state = function() {
@@ -120,16 +121,13 @@
 			this.positionFromGraph.x + this.state.position.x,
 			this.positionFromGraph.y + this.state.position.y,
 			this.positionFromGraph.z + this.state.position.z)
-
 		this.object3d.quaternion.setFromEuler(this.rotationFromGraph)
 		this.object3d.quaternion.multiply(this.state.quaternion)
 
 		if (this.dirty)
 			this.orbitControlCamera.updateProjectionMatrix()
-
-		this.object3d.updateMatrixWorld()
-
-		this.updated = true
+		this.object3d.updateMatrixWorld();
+		this.updated = true;
 	}
 
 	ThreeOrbitCameraPlugin.prototype.update_input = function(slot, data) {
@@ -164,6 +162,11 @@
 		else if (slot.name === 'far') {
 			this.orbitControlCamera.far = data
 			this.dirty = true
+		}
+		else if (slot.name === 'origin position')  {
+			this.originPosition = this.controls;
+			this.originPosition.target = data;
+			this.dirty = true;
 		}
 	}
 

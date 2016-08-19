@@ -8,7 +8,7 @@
 <body style="width:800px;margin: 0 auto">
 <h1>postMessage</h1>
 
-<script src="http://vizor.io/scripts/embed.js" data-vizorurl="   http://510258c9.ngrok.io/bryevo/test01-copy?autoplay=1" ></script>
+<script src="http://vizor.io/scripts/embed.js" data-vizorurl="http://7944b517.ngrok.io/bryevo/postmsg-obj?autoplay=1" ></script>
 
 VR Mode:<input id="toggle" type="checkbox" />
 
@@ -18,8 +18,9 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
 4 <input id="pos4" name="pos" type="radio" value="3"/>
 5 <input id="pos5" name="pos" type="radio" value="4"/>
 6 <input id="pos6" name="pos" type="radio" value="5"/><br/>
-<input type="button" id="geo"</input>
-<input type="button" id="orbitorigin" /> <br/>
+<input id="reseto" type="button" value="reset origin"/>
+<input type="button" id="orbitorigin" value="Origin Position"/> <br/>
+<input type="button" id="loadtext" value="Load Object" /> <br/>
 <br>
 <pre id="log">
     </pre>
@@ -33,8 +34,9 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
     var $position4 = $('#pos4');
     var $position5 = $('#pos5');
     var $position6 = $('#pos6');
-    var $geometry = $('#geo');
     var $origin = $('#orbitorigin');
+    var $reseto = $('#reseto');
+    var $loadtext = $('#loadtext');
 
     // the embed script will create an iframe but right now one isn't available
     // so we defer setting this until send()
@@ -92,86 +94,95 @@ Positions: 1 <input id="pos1" name="pos" type="radio" value="0"/>
     })
     $position2.on('click', function(e) {
         send({
-            command: 'setVariable',
+            command: 'setVariables',
             name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
-            command: 'getVariable',
+            command: 'getVariables',
             name: 'cameraIndex'
         })
     })
     $position3.on('click', function(e) {
         send({
-            command: 'setVariable',
+            command: 'setVariables',
             name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
-            command: 'getVariable',
+            command: 'getVariables',
             name: 'cameraIndex'
         })
     })
     $position4.on('click', function(e) {
         send({
-            command: 'setVariable',
+            command: 'setVariables',
             name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
-            command: 'getVariable',
+            command: 'getVariables',
             name: 'cameraIndex'
         })
     })
     $position5.on('click', function(e) {
         send({
-            command: 'setVariable',
+            command: 'setVariables',
             name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
-            command: 'getVariable',
+            command: 'getVariables',
             name: 'cameraIndex'
         })
     })
     $position6.on('click', function(e) {
         send({
-            command: 'setVariable',
+            command: 'setVariables',
             name: 'cameraIndex',
             value: e.currentTarget.value
         })
         send({
-            command: 'getVariable',
+            command: 'getVariables',
             name: 'cameraIndex'
         })
-    })
-    $geometry.on('click', function (e){
-        console.log(themesh);
-        if (themesh !== 'undefined') {
-            send({
-                command: 'setVariable',
-                name: 'obj_load',
-                value: themesh
-            })
-            send({
-                command: 'getVariable',
-                name: 'obj_load'
-            })
-        }
-        else
-        {
-            console.log("error");
-        }
     });
-    $origin.on('click', function(e) {
+    $reseto.on('click', function(e) {
         send({
-            command: 'setVariable',
-            name: 'orb_origin',
-            value: e.currentTarget.value
+            command: 'setVariables',
+            name: 'resetorigin',
+            value: true
         })
         send({
-            command: 'getVariable',
+            command: 'getVariables',
+            name: 'resetorigin'
+        })
+    });
+    $origin.on('click', function() {
+        send({
+            command: 'getVariables',
             name: 'orb_origin'
+        })
+
+    });
+    $loadtext.on('click', function(e) {
+        send({
+            command: 'setVariables',
+            name: 'boxobj',
+            value: "/data/bryevo/assets/scene/anotherone/business-card-box.obj"
+        })
+        send({
+            command: 'getVariables',
+            name: 'boxobj'
+        })
+        send({
+            command: 'setVariables',
+            name: 'boxmtl',
+            value: "/data/bryevo/assets/scene/anotherone/business-card-box.mtl"
+        })
+        send({
+            command: 'getVariables',
+            name: 'boxmtl'
         })
     });
     window.addEventListener('message', function(e) {
