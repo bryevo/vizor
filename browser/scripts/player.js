@@ -45,8 +45,8 @@ function Player() {
 	that.buildVariableIndex();
 	});
 }
+
 Player.prototype.setVariables = function(variablez) {
-	debugger;
 	var that = this;
 
 	if(!Array.isArray(variablez)) {

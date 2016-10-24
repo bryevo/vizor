@@ -55,7 +55,7 @@ if (userAndGraph[userAndGraph.length-1] === 'edit')
 
 userAndGraph = userAndGraph.slice(-2) // last two parts
 
-var localName = argv._[1] || userAndGraph[1]
+var localName = argv["hostname"] || userAndGraph[1]
 
 userAndGraph = userAndGraph.join('/')
 

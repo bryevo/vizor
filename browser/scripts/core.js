@@ -53,6 +53,7 @@ E2.COLOR_COMPATIBLE_SLOT = '#080';
 E2.GRAPH_NODES = ['graph', 'loop', 'array_function', 'spawner']
 
 E2.LOADING_NODES = {
+	'obj_mtl_model_loader': 'model',
 	'three_loader_model': 'model',
 	'three_loader_scene': 'scene',
 	'url_texture_generator': 'texture',

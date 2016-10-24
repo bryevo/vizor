@@ -163,9 +163,8 @@
 			this.orbitControlCamera.far = data
 			this.dirty = true
 		}
-		else if (slot.name === 'origin position')  {
-			this.originPosition = this.controls;
-			this.originPosition.target = data;
+		else if (slot.name === 'origin position')  {//does not update scene when data changes
+			this.controls.target = data;
 			this.dirty = true;
 		}
 	}
